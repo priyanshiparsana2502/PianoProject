@@ -57,3 +57,6 @@ apt-get install timidity timidity-interfaces-extra
 
 ### Credit
 [audio_to_midi_melodia](https://github.com/justinsalamon/audio_to_midi_melodia)
+
+### Credit
+* https://github.com/gcunhase
