@@ -1,61 +1,47 @@
-### Wav to MIDI to Wav
-Extracts the melody notes from an audio file and exports them to MIDI and JAMS files.
+# audio-to-midi
 
-The script extracts the melody from an audio file using the [Melodia](http://mtg.upf.edu/technologies/melodia) algorithm, and then segments the continuous pitch sequence into a series of quantized notes, and exports to MIDI using the provided BPM.
+`audio-to-midi` takes in a sound file and converts it to a multichannel MIDI file. It accomplishes this by performing FFT's on all channels of the audio data at user specified time steps. It then separates the resulting frequency analysis into equivalence classes which correspond to the twelve tone scale; the volume of each class being the average volume of its constituent frequencies. It then formats this data for MIDI and writes it out to a user specified file. It has the ability to convert whichever audio file formats are supported by the [soundfile](https://pypi.org/project/SoundFile/) module. libsndfile must be installed before running `audio-to-midi`
 
-### Usage
-```bash
-python main.py [--folder FOLDER_NAME] [--bpm BPM] [--smooth SMOOTH] [--minduration MINDURATION] [--jams]
+- [This is an example of a conversion using a time window of 5ms and an activation level of 0.](https://soundcloud.com/neil-jones/this-is-a-test)
+
+## Installation
+
 ```
-For example:
-```bash
-python main.py --folder assets/COGNIMUSE/ --bpm 146 --smooth 0.25 --minduration 0.1 --jams
+> python3 ./setup.py install
 ```
 
-### Notes
-* *wav* to *mp3*:
-```
-ffmpeg -i assets/test/10.wav assets/test/10.mp3
-```
-* Find out *bpm* (146 in my case):
-```
-bpm-tag assets/test/10.mp3
-```
-* *wav* to *mid*:
-```
-python audio_to_midi_melodia.py assets/test/10.wav assets/test/10.mid 146 --smooth 0.25 --minduration 0.1 --jams
-```
-* *mid* to *wav* [converter](https://www.zamzar.com/convert/midi-to-wav/)
-```bash
-timidity 10.mid -Ow -o 10_recovered.wav
+## Usage
+
+```shell
+> audio-to-midi --help
+usage: audio-to-midi [-h] [--output OUTPUT] [--time-window TIME_WINDOW] 
+  [--activation-level ACTIVATION_LEVEL] [--condense] [--single-note] 
+  [--note-count NOTE_COUNT] [--no-progress] infile
+
+positional arguments:
+  infile                The sound file to process.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --output OUTPUT, -o OUTPUT
+                        The MIDI file to output. Default: <infile>.mid
+  --time-window TIME_WINDOW, -t TIME_WINDOW
+                        The time span over which to compute the individual FFTs in milliseconds.
+  --activation-level ACTIVATION_LEVEL, -a ACTIVATION_LEVEL
+                        The amplitude threshold for notes to be added to the MIDI file. Must be between 0 and 1.
+  --condense, -c        Combine contiguous notes at their average amplitude.
+  --single-note, -s     Only add the loudest note to the MIDI file for a given time window.
+  --note-count NOTE_COUNT, -C NOTE_COUNT
+                        Only add the loudest n notes to the MIDI file for a given time window.
+  --no-progress, -n     Don't print the progress bar.
 ```
 
-### Dependencies
-* Install dependencies:
-```bash
-pip install vamp jams numpy scipy
-```
-* Librosa
-```bash
-git clone https://github.com/librosa/librosa
-cd dependencies/librosa
-python setup.py build
-python setup.py install
-```
-* [MidiUtil](https://code.google.com/p/midiutil/)
-```bash
-cd dependencies/MIDIUtil-0.89
-python setup.py install
-```
-* Download [Melodia plugin](http://mtg.upf.edu/technologies/melodia) and copy all files to */usr/local/lib/vamp*
-* Audio tools
-```bash
-pip install pydub
-apt-get install ffmpeg bpm-tools
-apt-get install timidity timidity-interfaces-extra
-```
+## Example
 
-### Credit
-[audio_to_midi_melodia](https://github.com/justinsalamon/audio_to_midi_melodia)
-
-https://github.com/gcunhase
+```shell
+> audio-to-midi ./this_is_a_test.wav --time-window 5 --activation-level 0.0
+Converting: ./this_is_a_test.wav
+|================================================================================| 100.00%
+> ls ./*.mid
+./this_is_a_test.wav.mid
+```

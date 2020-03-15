@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/WavToMidiFiles.iml" filepath="$PROJECT_DIR$/.idea/WavToMidiFiles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/audio-to-midi-master.iml" filepath="$PROJECT_DIR$/.idea/audio-to-midi-master.iml" />
     </modules>
   </component>
 </project>
