@@ -3,21 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3611f55d-9b51-436a-8ab6-d3e04035dcc9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/test/10.mid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/test/10.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/test/10_recovered.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/test/14.mid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/test/14.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/test/14_recovered.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/test/23.mid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/test/23.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/test/23_recovered.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio_to_midi_melodia.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/librosa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_wav2mid2wav.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/version.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +58,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
