@@ -1,61 +1,39 @@
-### Wav to MIDI to Wav
-Extracts the melody notes from an audio file and exports them to MIDI and JAMS files.
+# Deep Audio Classification
+A pipeline to build a dataset from your own music library and use it to fill the missing genres
 
-The script extracts the melody from an audio file using the [Melodia](http://mtg.upf.edu/technologies/melodia) algorithm, and then segments the continuous pitch sequence into a series of quantized notes, and exports to MIDI using the provided BPM.
+Read the [article on Medium](https://medium.com/@juliendespois/finding-the-genre-of-a-song-with-deep-learning-da8f59a61194#.yhemoyql0)
 
-### Usage
-```bash
-python main.py [--folder FOLDER_NAME] [--bpm BPM] [--smooth SMOOTH] [--minduration MINDURATION] [--jams]
-```
-For example:
-```bash
-python main.py --folder assets/COGNIMUSE/ --bpm 146 --smooth 0.25 --minduration 0.1 --jams
-```
+Required install:
 
-### Notes
-* *wav* to *mp3*:
 ```
-ffmpeg -i assets/test/10.wav assets/test/10.mp3
-```
-* Find out *bpm* (146 in my case):
-```
-bpm-tag assets/test/10.mp3
-```
-* *wav* to *mid*:
-```
-python audio_to_midi_melodia.py assets/test/10.wav assets/test/10.mid 146 --smooth 0.25 --minduration 0.1 --jams
-```
-* *mid* to *wav* [converter](https://www.zamzar.com/convert/midi-to-wav/)
-```bash
-timidity 10.mid -Ow -o 10_recovered.wav
+eyed3
+sox --with-lame
+tensorflow
+tflearn
 ```
 
-### Dependencies
-* Install dependencies:
-```bash
-pip install vamp jams numpy scipy
+- Create folder Data/Raw/
+- Place your labeled .mp3 files in Data/Raw/
+
+To create the song slices (might be long):
+
 ```
-* Librosa
-```bash
-git clone https://github.com/librosa/librosa
-cd dependencies/librosa
-python setup.py build
-python setup.py install
-```
-* [MidiUtil](https://code.google.com/p/midiutil/)
-```bash
-cd dependencies/MIDIUtil-0.89
-python setup.py install
-```
-* Download [Melodia plugin](http://mtg.upf.edu/technologies/melodia) and copy all files to */usr/local/lib/vamp*
-* Audio tools
-```bash
-pip install pydub
-apt-get install ffmpeg bpm-tools
-apt-get install timidity timidity-interfaces-extra
+python main.py slice
 ```
 
-### Credit
-[audio_to_midi_melodia](https://github.com/justinsalamon/audio_to_midi_melodia)
+To train the classifier (long too):
 
-https://github.com/gcunhase
+```
+python main.py train
+```
+
+To test the classifier (fast):
+
+```
+python main.py test
+```
+
+- Most editable parameters are in the config.py file, the model can be changed in the model.py file.
+- I haven't implemented the pipeline to label new songs with the model, but that can be easily done with the provided functions, and eyed3 for the mp3 manipulation. Here's the full pipeline you would need to use.
+
+![alt tag](https://github.com/despoisj/DeepAudioClassification/blob/master/img/pipeline.png)

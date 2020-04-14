@@ -1,0 +1,2 @@
+model_checkpoint_path: "D:\\ANISH\\MSc\\Classificatiton research\\DeepAudioClassification-master\\musicDNN.tflearn"
+all_model_checkpoint_paths: "D:\\ANISH\\MSc\\Classificatiton research\\DeepAudioClassification-master\\musicDNN.tflearn"
